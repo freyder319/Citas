@@ -24,17 +24,17 @@
         $controlador->eliminarConsultorio($_GET["id"]);
         }
         elseif($_GET["accion"] == "modificarConsultorio"){
-        $controlador->modificarConsultorio($_GET["id"]);
+        $controlador->modificarConsultorio($_POST["id"]);
         }
         elseif($_GET["accion"] == "guardarModificacionConsultorio"){
         $controlador->guardarModificacionConsultorio($_POST["id"], $_POST["nombre"]);
         }
         elseif($_GET["accion"] == "agregarConsultorio"){
-        $controlador->verPagina('Vista/html/agregarConsultorio.php');
+        $controlador->guardarConsultorio(
+            $_POST["ConNumero"],
+            $_POST["ConNombre"]
+        );
         }
-        elseif($_GET["accion"] == "guardarConsultorio"){
-        $controlador->guardarConsultorio($_POST["ConNombre"]);
-        }       
         elseif($_GET["accion"] == "guardarCita"){
             $controlador->agregarCita(
             $_POST["asignarDocumento"],

@@ -101,15 +101,13 @@ public function guardarModificacionConsultorio($id, $nombre) {
     header("Location: index.php?accion=consultorio");
     exit();
 }
-public function agregarConsultorio($nombre) {
+public function guardarConsultorio($id,$nombre) {
     $gestorCita = new GestorCita();
-    $gestorCita->guardarNuevoConsultorio($nombre);
-    echo "Consultorio agregado correctamente"; 
-}
-public function guardarConsultorio($nombre) {
-    $gestorCita = new GestorCita();
-    $gestorCita->guardarNuevoConsultorio($nombre);
-    header("Location: index.php?accion=consultorio");
-    exit();
+    $registros=$gestorCita->guardarNuevoConsultorio($id,$nombre);
+    if ($registros>0){
+        echo "Se insertó el consultorio con exito";
+    }else{
+        echo "Error al ingresar al consult";
+    }
 }
 }

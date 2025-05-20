@@ -157,16 +157,19 @@ class GestorCita {
     public function actualizarConsultorio($id, $nombre) {
     $conexion = new Conexion();
     $conexion->abrir();
-    $sql = "UPDATE consultorios SET Connombre='$nombre' WHERE conNumero=$id";
+    $sql = "UPDATE consultorios SET Connombre='$nombre' WHERE ConNumero=$id";
     $conexion->consulta($sql);
     $conexion->cerrar();
     }
-    public function guardarNuevoConsultorio($nombre) {
+    public function guardarNuevoConsultorio($id,$nombre) {
     $conexion = new Conexion();
     $conexion->abrir();
-    $sql = "INSERT INTO consultorios (ConNombre) VALUES ('$nombre')";
+    $sql = "INSERT INTO consultorios (ConNumero,ConNombre) VALUES ('$id','$nombre')";
     $conexion->consulta($sql);
     $conexion->cerrar();
+    $filasAfectadas = $conexion->obtenerFilasAfectadas();
+    return $filasAfectadas;
+    
 }
 }
 ?>

@@ -25,8 +25,7 @@
  </ul>
  <div id="contenido">
     <h2>Consultorios</h2>
-    <a href="index.php?accion=agregarConsultorio">Agregar Consultorio</a>
-
+    <input type="button" name="ingConsultorio" id="ingConsultorio" value="Ingresar Consultorio" onclick="mostrarFormulario2();">
     <br><br>
     <table border="1">
         <tr>
@@ -49,11 +48,15 @@
     </table>
 </div>
  </div> 
-    <div id="frmPaciente" title="Agregar Nuevo Paciente">
-    <form id="agregarPaciente">
+    <div id="frmConsultorio" title="Agregar Nuevo Paciente">
+    <form id="agregarConsultorio" method="PO">
     <table>
         <tr>
-            <td>Nombre De Consultorio</td>
+            <td>ID Consultorio</td>
+            <td><input type="number" name="ConNumero" id="ConNumero"></td>
+        </tr>
+        <tr>
+            <td>Nombre del Consultorio</td>
             <td><input type="text" name="ConNombre" id="ConNombre"></td>
         </tr>
     </table>

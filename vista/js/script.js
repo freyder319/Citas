@@ -9,6 +9,16 @@ $(document).ready(function(){
  "Cancelar":cancelar
  }
  });
+ $("#frmConsultorio").dialog({
+ autoOpen: false,
+ height: 310,
+ width: 400,
+ modal: true,
+ buttons: {
+ "Insertar":insertarConsultorio,
+ "Cancelar":cancelar
+ }
+ });
 });
 function consultarPaciente(){
  var url = "index.php?accion=consultarPaciente&documento=" + 
@@ -71,3 +81,29 @@ function cancelarCita(){
 $("#cancelarDocumento").val() ;
  $("#paciente3").load(url); 
 }
+function mostrarFormulario2(){
+ documento = "" + $("#asignarDocumento").val();
+ $("#ConNumero").attr("value",documento);
+ $("#frmConsultorio").dialog('open');
+}
+function insertarConsultorio(){
+  let conNumero = $("#ConNumero").val();
+  let conNombre = $("#ConNombre").val();
+
+  console.log("Valores antes de enviar:", conNumero, conNombre);
+
+  $.ajax({
+    type: "POST",
+    url: "index.php?accion=agregarConsultorio",
+    data: { ConNumero: conNumero, ConNombre: conNombre }, // Enviar como objeto en lugar de serialize()
+    success: function(response) {
+      console.log("Respuesta del servidor:", response);
+      $("#frmConsultorio").dialog('close'); 
+      $("#consultorio").html(response);
+    },
+    error: function(xhr, status, error) {
+      console.error("Error en la petición AJAX:", error);
+    }
+  });
+}
+
