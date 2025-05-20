@@ -22,6 +22,7 @@
             <li class="activa"><a class="activa" href="index.php?accion=asignar">Asignar</a> </li>
             <li><a href="index.php?accion=consultar">Consultar Cita</a> </li>
             <li><a href="index.php?accion=cancelar">Cancelar Cita</a> </li>
+            <li><a href="index.php?accion=consultorio">Consultorios</a> </li>
         </ul>
         <div id="contenido">
             <h2>Asignar Cita</h2>
@@ -29,7 +30,7 @@
                 <table>
                     <tr>
                         <td>Documento del paciente</td>
-                        <input type="text" name="asignarDocumento" id="asignarDocumento" required></td>
+                        <td><input type="text" name="asignarDocumento" id="asignarDocumento" required></td>
                     </tr>
                     <tr>
                         <td colspan="2"><input type="button" value="Consultar" name="asignarConsultar" id="asignarConsultar" onclick="consultarPaciente()" ></td>

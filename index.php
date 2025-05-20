@@ -17,6 +17,24 @@
         elseif($_GET["accion"] == "cancelar"){
             $controlador->verPagina('Vista/html/cancelar.php');
         }
+        elseif($_GET["accion"] == "consultorio"){
+            $controlador->verConsultorio();
+        }
+        elseif($_GET["accion"] == "eliminarConsultorio"){
+        $controlador->eliminarConsultorio($_GET["id"]);
+        }
+        elseif($_GET["accion"] == "modificarConsultorio"){
+        $controlador->modificarConsultorio($_GET["id"]);
+        }
+        elseif($_GET["accion"] == "guardarModificacionConsultorio"){
+        $controlador->guardarModificacionConsultorio($_POST["id"], $_POST["nombre"]);
+        }
+        elseif($_GET["accion"] == "agregarConsultorio"){
+        $controlador->verPagina('Vista/html/agregarConsultorio.php');
+        }
+        elseif($_GET["accion"] == "guardarConsultorio"){
+        $controlador->guardarConsultorio($_POST["ConNombre"]);
+        }       
         elseif($_GET["accion"] == "guardarCita"){
             $controlador->agregarCita(
             $_POST["asignarDocumento"],

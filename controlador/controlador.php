@@ -3,14 +3,23 @@ class Controlador {
  public function verPagina($ruta){
  require_once $ruta;
  } 
- public function agregarCita($doc,$med,$fec,$hor,$con){
- $cita = new Cita(null, $fec, $hor, $doc, $med, $con, "Solicitada", 
-"Ninguna");
- $gestorCita = new GestorCita();
- $id = $gestorCita->agregarCita($cita);
- $result = $gestorCita->consultarCitaPorId($id);
- require_once 'Vista/html/confirmarCita.php';
- }
+ public function agregarCita($doc, $med, $fec, $hor, $con) {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $gestorCita = new GestorCita($conexion);
+
+    if (!$gestorCita->verificarPaciente($doc)) {
+        echo "<script>alert('El documento ingresado no existe en la base de datos. Por Favor Registrese.'); window.history.back();</script>";
+        return;
+    }
+
+    $cita = new Cita(null, $fec, $hor, $doc, $med, $con, "Solicitada", "Ninguna");
+    $id = $gestorCita->agregarCita($cita);
+    $result = $gestorCita->consultarCitaPorId($id);
+    require_once 'Vista/html/confirmarCita.php';
+    
+}
+
  public function consultarCitas($doc){
  $gestorCita = new GestorCita();
  $result = $gestorCita->consultarCitasPorDocumento($doc);
@@ -66,4 +75,41 @@ class Controlador {
  $result = $gestorCita->validacion($doc);
  require_once 'Vista/html/consultarPaciente.php';
  }
+ public function verConsultorio(){
+ $gestorCita = new GestorCita();
+ $resultado = $gestorCita->consultorio();
+ require_once 'Vista/html/consultorios.php';
+ }
+ public function eliminarConsultorio($id) {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $sql = "DELETE FROM consultorios WHERE ConNumero=$id";
+    $conexion->consulta($sql);
+    $conexion->cerrar();
+    header("Location: index.php?accion=consultorio");
+    exit();
+ }
+public function modificarConsultorio($id) {
+    $gestorCita = new GestorCita();
+    $consultorio = $gestorCita->obtenerConsultorioPorId($id);
+    require_once 'Vista/html/modificarConsultorio.php';
+}
+
+public function guardarModificacionConsultorio($id, $nombre) {
+    $gestorCita = new GestorCita();
+    $gestorCita->actualizarConsultorio($id, $nombre);
+    header("Location: index.php?accion=consultorio");
+    exit();
+}
+public function agregarConsultorio($nombre) {
+    $gestorCita = new GestorCita();
+    $gestorCita->guardarNuevoConsultorio($nombre);
+    echo "Consultorio agregado correctamente"; 
+}
+public function guardarConsultorio($nombre) {
+    $gestorCita = new GestorCita();
+    $gestorCita->guardarNuevoConsultorio($nombre);
+    header("Location: index.php?accion=consultorio");
+    exit();
+}
 }
