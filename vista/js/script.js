@@ -81,6 +81,10 @@ function cancelarCita(){
 $("#cancelarDocumento").val() ;
  $("#paciente3").load(url); 
 }
+function eliminar_consultorio(){
+   url = "index.php?accion=eliminarConsultorio=" + 
+   $("#eliminarConsultorio").val() ;
+}
 function mostrarFormulario2(){
  documento = "" + $("#asignarDocumento").val();
  $("#ConNumero").attr("value",documento);

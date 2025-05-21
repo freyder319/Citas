@@ -29,6 +29,12 @@ return $this->result;
  public function obtenerFilasAfectadas(){
  return $this->filasAfectadas;
  } 
+ public function obtenerUnaFila(){
+    if ($this->result){
+        return $this->result->fetch_assoc();
+    }
+    return null;
+ } 
  public function obtenerCitaId(){
  return $this->citaId;
  }

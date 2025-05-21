@@ -21,10 +21,10 @@
             $controlador->verConsultorio();
         }
         elseif($_GET["accion"] == "eliminarConsultorio"){
-        $controlador->eliminarConsultorio($_GET["id"]);
+        $controlador->eliminarConsultorioxid($_GET["id"]);
         }
         elseif($_GET["accion"] == "modificarConsultorio"){
-        $controlador->modificarConsultorio($_POST["id"]);
+        $controlador->modificarConsultorio($_GET["id"]);
         }
         elseif($_GET["accion"] == "guardarModificacionConsultorio"){
         $controlador->guardarModificacionConsultorio($_POST["id"], $_POST["nombre"]);

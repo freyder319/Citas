@@ -80,15 +80,20 @@ class Controlador {
  $resultado = $gestorCita->consultorio();
  require_once 'Vista/html/consultorios.php';
  }
- public function eliminarConsultorio($id) {
-    $conexion = new Conexion();
-    $conexion->abrir();
-    $sql = "DELETE FROM consultorios WHERE ConNumero=$id";
-    $conexion->consulta($sql);
-    $conexion->cerrar();
-    header("Location: index.php?accion=consultorio");
-    exit();
- }
+ public function eliminarConsultorioxid($id) {
+    $gestorCita= new GestorCita();
+    $resultado=$gestorCita->eliminarConsultorioxid($id);
+    if($resultado >= 1){
+        echo "No se puede eliminar el consultorio por que tiene citas asociadas";
+    } else {
+    $resultado=$gestorCita->eliminarConsultorio($id);
+    if($registros>0){
+        echo "Se elimino el consultorio con exito";
+    }else{
+        echo "Error al eliminar el Consultorio";
+    }
+    }
+    }
 public function modificarConsultorio($id) {
     $gestorCita = new GestorCita();
     $consultorio = $gestorCita->obtenerConsultorioPorId($id);

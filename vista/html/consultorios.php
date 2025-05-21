@@ -26,6 +26,10 @@
  <div id="contenido">
     <h2>Consultorios</h2>
     <input type="button" name="ingConsultorio" id="ingConsultorio" value="Ingresar Consultorio" onclick="mostrarFormulario2();">
+    <?php if (isset($_REQUEST['error'])){
+        echo "No se puede eliminar el consultorio por que tiene citas asociadas";
+    }
+    ?>
     <br><br>
     <table border="1">
         <tr>
@@ -44,12 +48,13 @@
             </td>
 
         </tr>
+
         <?php } ?>
     </table>
 </div>
  </div> 
     <div id="frmConsultorio" title="Agregar Nuevo Paciente">
-    <form id="agregarConsultorio" method="PO">
+    <form id="agregarConsultorio" method="POST">
     <table>
         <tr>
             <td>ID Consultorio</td>

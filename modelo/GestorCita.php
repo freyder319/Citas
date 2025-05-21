@@ -171,5 +171,27 @@ class GestorCita {
     return $filasAfectadas;
     
 }
-}
+
+  public function eliminarConsultorio($id) {
+        $conexion = new Conexion();
+        $conexion->abrir();
+        $sql = "DELETE FROM consultorios WHERE ConNumero=$id";
+        $conexion->consulta($sql);
+        $conexion->cerrar();
+        header("Location: index.php?accion=consultorio");
+    exit();
+  }
+
+  public function eliminarConsultorioxid($id) {
+    $conexion = new Conexion();
+    $conexion->abrir();
+    $sql="SELECT count(*) as cantidad from citas inner join consultorios on CitConsultorio=ConNumero where  ConNumero='$id'";
+    $conexion->consulta($sql);
+    $resultado = $conexion->obtenerUnaFila();
+    $conexion->cerrar();
+    return $resultado['cantidad'] ; 
+    }
+  }
+
 ?>
+
